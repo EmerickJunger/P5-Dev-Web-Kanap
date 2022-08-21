@@ -26,8 +26,8 @@ function getProduct() {
                 const price = document.getElementById("price");
                 price.innerHTML = `${result.price}`
 
-                
-
+                const description = document.getElementById("description");
+                description.innerHTML = result.description;
             }
         )
     } catch (error) {
