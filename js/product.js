@@ -9,27 +9,42 @@ async function fetchFromApi(id = "") {
 };
 
 function getProduct() {
-    console.log(window.location)
+    //console.log(window.location)
     try {
         fetchFromApi(window.location.search.split("?id=")[1]).then(
             result => {
-                console.log(result);
-                const img = document.querySelector(".item__img");
-                img.innerHTML = `<img src="${result.imageUrl}" alt="${result.altTxt}">`;
+                //console.log(result);
+                const imgDiv = document.querySelector(".item__img");
+                let img = document.createElement("img");
 
-                const name = document.getElementById("title");
-                name.innerHTML = result.name;
+                img.src = result.imageUrl;
+                img.alt = result.altTxt;
+                imgDiv.appendChild(img)
 
                 const title = document.querySelector("title");
-                title.innerHTML = result.name;
+                title.innerText = result.name;
                 
                 const price = document.getElementById("price");
-                price.innerHTML = `${result.price}`
+                price.innerText = result.price;
 
                 const description = document.getElementById("description");
-                description.innerHTML = result.description;
+                description.innerText = result.description;
+
+                
+                for (let i=0; i<result.colors.length;i++){
+                    console.log(result.colors[i])
+                    const colors = document.getElementById("colors");
+                    let option = document.createElement("option");
+                    option.value = result.colors[i];
+                    option.innerText = result.colors[i];
+                    colors.appendChild(option);
+                }
             }
         )
+        const button = document.getElementById("addToCart");
+        button.addEventListener('click', function(){
+            localStorage.setItem("color","blue");
+        });
     } catch (error) {
         console.error(error);
     } 
