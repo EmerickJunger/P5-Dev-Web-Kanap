@@ -9,9 +9,15 @@ async function fetchFromApi(id = "") {
 };
 
 function getProduct() {
-    //console.log(window.location)
+    console.log(window.location)
     try {
-        fetchFromApi(window.location.search.split("?id=")[1]).then(
+        //fetchFromApi(window.location.search.split("?id=")[1]).then(
+        
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        
+
             result => {
                 //console.log(result);
                 const imgDiv = document.querySelector(".item__img");
@@ -40,7 +46,7 @@ function getProduct() {
                     colors.appendChild(option);
                 }
             }
-        )
+        //)
         const button = document.getElementById("addToCart");
         button.addEventListener('click', function(){
             localStorage.setItem("color","blue");

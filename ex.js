@@ -37,3 +37,6 @@ section.apprendChild(baliseA)
                             <p class="productDescription">${product.description}</p>
                         </article>
                     <a/>`;
+
+
+                    
