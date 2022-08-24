@@ -11,15 +11,11 @@ async function fetchFromApi(id = "") {
 function getProduct() {
     console.log(window.location)
     try {
-        //fetchFromApi(window.location.search.split("?id=")[1]).then(
-        
-        const queryString = window.location.search;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
+        fetchFromApi(window.location.search.split("?id=")[1]).then(
         
 
             result => {
-                //console.log(result);
+                console.log(result);
                 const imgDiv = document.querySelector(".item__img");
                 let img = document.createElement("img");
 
@@ -46,11 +42,23 @@ function getProduct() {
                     colors.appendChild(option);
                 }
             }
-        //)
+        )
         const button = document.getElementById("addToCart");
         button.addEventListener('click', function(){
-            localStorage.setItem("color","blue");
-        });
+            localStorage.setItem("panier","blue");
+
+            /*const queryString = window.location.search;
+            console.log(queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const price = urlParams.const('price')
+            console.log(product);*/
+            
+            
+        })
+
+    
+
+
     } catch (error) {
         console.error(error);
     } 
