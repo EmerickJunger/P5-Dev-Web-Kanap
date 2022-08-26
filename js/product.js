@@ -7,6 +7,7 @@ async function fetchFromApi(id = "") {
     const result = await response.json();
     return result;
 };
+    
 
 function getProduct() {
     console.log(window.location)
@@ -45,15 +46,7 @@ function getProduct() {
         )
         const button = document.getElementById("addToCart");
         button.addEventListener('click', function(){
-            localStorage.setItem("panier","blue");
-
-            /*const queryString = window.location.search;
-            console.log(queryString);
-            const urlParams = new URLSearchParams(queryString);
-            const price = urlParams.const('price')
-            console.log(product);*/
-            
-            
+            localStorage.setItem("panier","blue");   
         })
 
     
