@@ -104,10 +104,18 @@ function verifyColor(color){
     let span = document.createElement("span");
     console.log(color);
     if (color.includes("--SVP, choisissez une couleur --")){
+        
+        span.style.color = "red";
+        span.innerText = "Veuillez choisir une couleur";
+        const divItemContentSettingsQuantity = document.querySelector(".item__content__settings__quantity");
+        const br = document.createElement("br");
+        divItemContentSettingsQuantity.appendChild(br);
+        divItemContentSettingsQuantity.appendChild(span);
         return false;
 
     } else
     {
+        span.remove();
         return true;
     }
 }
