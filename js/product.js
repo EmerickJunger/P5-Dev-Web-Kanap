@@ -47,18 +47,7 @@ function getProduct() {
             }
         )
         const button = document.getElementById("addToCart");
-        /*le nombre de kanap doit etre compris entre 1 et 100
-                il faut donc creer une boucle" avec une valeur min de 1
-                et une max de 100*/
-        /* couleur choisi pour ajouter au panier sinon erreur */
         button.addEventListener('click', function(){
-            /*let objJson = {
-                title : "result.name",
-                color : "result.colors",
-                quantity : "",
-            }
-            let objKanap = JSON.stringify(objJson);*/
-            //localStorage.setItem("panier","obj",objKanap);
             let isValidQuantity = true;
             const quantity = document.getElementById('quantity');
             isValidQuantity = verifyQuantity(quantity.value);
@@ -70,6 +59,13 @@ function getProduct() {
             
             if (isValidQuantity && isValidColor){
                 //Gestion localStorage
+                let addToCart = {
+                    name: result.name,
+                    price: parseFloat(result.price),
+                    quantity: parseFloat(quantity.value),
+                    _id: id,
+                  };
+                //const product = {id: ""};
             }
 
 
@@ -81,6 +77,7 @@ function getProduct() {
         console.error(error);
     } 
 }
+
 function verifyQuantity(quantity){
     let span = document.createElement("span");
     if (Number(quantity)<1){
