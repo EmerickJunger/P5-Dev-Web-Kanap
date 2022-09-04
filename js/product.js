@@ -60,16 +60,12 @@ function getProduct() {
             if (isValidQuantity && isValidColor){
                 //Gestion localStorage
                 let addToCart = {
-                    name: result.name,
-                    price: parseFloat(result.price),
-                    quantity: parseFloat(quantity.value),
-                    _id: id,
-                  };
-                //const product = {id: ""};
+                    name: title.innerText,
+                    price: parseFloat(price.innerText),
+                    quantity: parseFloat(isValidQuantity),
+                    id: window.location,
+                };
             }
-
-
-
         }
         )
         // pas de prix stocké dans le localstorage
@@ -92,7 +88,7 @@ function verifyQuantity(quantity){
     
     } else 
     {
-        span.remove();
+        span.remove(span);
         return true;
     };
 }
@@ -112,7 +108,7 @@ function verifyColor(color){
 
     } else
     {
-        span.remove();
+        span.remove(span);
         return true;
     }
 }
