@@ -1,9 +1,7 @@
-const baseUrl = "http://localhost:3000/api/products/";
+//recuperer le local Storage
 
-async function fetchFromApi(id = "") {
-    const url = baseUrl + id;
+//boucle for reccrer le html
 
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-};
+// recuperer le prix avec fetch a l'api
+
+//function prend param id

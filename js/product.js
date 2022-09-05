@@ -7,14 +7,19 @@ async function fetchFromApi(id = "") {
     const result = await response.json();
     return result;
 };
-    
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get("id");
 
+let productName = "";
 function getProduct() {
     console.log(window.location);
     try {
-        fetchFromApi(window.location.search.split("?id=")[1]).then(
+        //fetchFromApi(window.location.search.split("?id=")[1]).then(
+        fetch(baseUrl+id)
+        .then(response=>response.json())
+        .then(
         
-
             result => {
                 console.log(result);
                 const imgDiv = document.querySelector(".item__img");
@@ -26,14 +31,14 @@ function getProduct() {
 
                 const title = document.querySelector("title");
                 title.innerText = result.name;
-                
+                productName = result.name;
+
                 const price = document.getElementById("price");
                 price.innerText = result.price;
 
                 const description = document.getElementById("description");
                 description.innerText = result.description;
 
-                
                 for (let i=0; i<result.colors.length;i++){
                     console.log(result.colors[i]);
                     const colors = document.getElementById("colors");
@@ -60,15 +65,42 @@ function getProduct() {
             if (isValidQuantity && isValidColor){
                 //Gestion localStorage
                 let addToCart = {
-                    name: title.innerText,
-                    price: parseFloat(price.innerText),
-                    quantity: parseFloat(isValidQuantity),
-                    id: window.location,
+                    //img: ,
+                    // alt txt
+                    name: productName,
+                    color: color,
+                    quantity: Number(quantity.value),
+                    id: id,
                 };
+                
+                let cart = JSON.parse(localStorage.getItem("products"));
+                if (cart){
+                    let isExist = false;
+                    for (let i = 0; i<cart.length; i++){
+                        if(color == cart[i].color && id == cart[i].id){
+                            //cart[i].quantity = Number(quantity.value)+Number(cart[i].quantity);
+                            cart[i].quantity += Number(quantity.value);
+                            isExist = true;
+                        }
+                    }
+                    if(!isExist){
+                        cart.push(addToCart);
+                    }
+                    
+                    localStorage.setItem("products",JSON.stringify(cart));
+
+                } else {
+                    cart = [];
+                    cart.push(addToCart);
+                    localStorage.setItem("products",JSON.stringify(cart));
+                    
+                    
+                } // rediriger vers cart
+
+                window.location.href = "cart.html";
             }
         }
         )
-        // pas de prix stocké dans le localstorage
     } catch (error) {
         console.error(error);
     } 
