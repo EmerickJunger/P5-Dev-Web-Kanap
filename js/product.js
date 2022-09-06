@@ -15,7 +15,6 @@ let productName = "";
 function getProduct() {
     console.log(window.location);
     try {
-        //fetchFromApi(window.location.search.split("?id=")[1]).then(
         fetch(baseUrl+id)
         .then(response=>response.json())
         .then(
@@ -47,8 +46,6 @@ function getProduct() {
                     option.innerText = result.colors[i];
                     colors.appendChild(option);
                 }
-
-
             }
         )
         const button = document.getElementById("addToCart");
@@ -78,7 +75,6 @@ function getProduct() {
                     let isExist = false;
                     for (let i = 0; i<cart.length; i++){
                         if(color == cart[i].color && id == cart[i].id){
-                            //cart[i].quantity = Number(quantity.value)+Number(cart[i].quantity);
                             cart[i].quantity += Number(quantity.value);
                             isExist = true;
                         }
@@ -86,17 +82,13 @@ function getProduct() {
                     if(!isExist){
                         cart.push(addToCart);
                     }
-                    
                     localStorage.setItem("products",JSON.stringify(cart));
 
                 } else {
                     cart = [];
                     cart.push(addToCart);
-                    localStorage.setItem("products",JSON.stringify(cart));
-                    
-                    
+                    localStorage.setItem("products",JSON.stringify(cart));     
                 } // rediriger vers cart
-
                 window.location.href = "cart.html";
             }
         }
@@ -105,7 +97,6 @@ function getProduct() {
         console.error(error);
     } 
 }
-
 function verifyQuantity(quantity){
     let span = document.createElement("span");
     if (Number(quantity)<1){
@@ -124,7 +115,6 @@ function verifyQuantity(quantity){
         return true;
     };
 }
-
 function verifyColor(color){
     let span = document.createElement("span");
     console.log(color);
