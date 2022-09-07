@@ -20,6 +20,24 @@ let price = 0;
 let fullPrice = 0;
 for(let i = 0; i < cart.lenght; i++){
     // traitement creation html
+    
+    const section = document.getElementById("cart__items");
+   
+    let article = document.createElement("article");
+    let div1 = document.createElement("div");
+    let img = document.createElement("img"); 
+    let div2 = document.createElement("div");
+    let div3 = document.createElement("div");
+    let h2 = document.createElement("h2");
+    let p1 = document.createElement("p");
+    let p2 = document.createElement("p");
+    let div4 = document.createElement("div");
+    let div5 = document.createElement("div");
+    let p3 = document.createElement("p");
+    let input = document.createElement("input");
+    let div6 = document.createElement("div");
+    let p4 = document.createElement("p");
+
     price = await getPrice(cart[i].id);
     // afficher price * cart[i].quantity
     fullPrice += price * cart[i].quantity;
