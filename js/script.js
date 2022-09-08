@@ -26,7 +26,7 @@ function getAllProducts() {
                     let h3 = document.createElement("h3");
                     let p = document.createElement("p");
 
-                    h3.className= "productName";
+                    h3.className = "productName";
                     p.className = "productDescription";
 
                     h3.innerText = product.name;

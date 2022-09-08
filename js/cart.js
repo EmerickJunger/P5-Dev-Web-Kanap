@@ -38,6 +38,13 @@ for(let i = 0; i < cart.lenght; i++){
     let div6 = document.createElement("div");
     let p4 = document.createElement("p");
 
+    article.className = "cart__item";
+    div1.className = "cart__item__img";
+    div2.className = "cart__item__content";
+    div3.className = "cart__item__content__description";
+
+
+
     price = await getPrice(cart[i].id);
     // afficher price * cart[i].quantity
     fullPrice += price * cart[i].quantity;
