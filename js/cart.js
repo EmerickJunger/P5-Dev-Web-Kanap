@@ -42,6 +42,23 @@ for(let i = 0; i < cart.lenght; i++){
     div1.className = "cart__item__img";
     div2.className = "cart__item__content";
     div3.className = "cart__item__content__description";
+    div4.className = "cart__item__content__settings";
+    div5.className = "cart__item__content__settings__quantity";
+    input.className = "itemQuantity";
+    div6.className = "cart__item__content__settings__delete";
+    p4.className = "deleteItem"
+    
+    h2.innerText = cart.name;
+    p1.innerText = cart.color;
+    p2.innerText = cart.price;
+    p3.innerText = cart.quantity;
+    p4.innerText = cart.delete;
+
+    
+
+
+
+
 
 
 
