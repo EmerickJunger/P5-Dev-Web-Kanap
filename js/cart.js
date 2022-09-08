@@ -58,15 +58,21 @@ for(let i = 0; i < cart.lenght; i++){
     img1.setAttribute("src", cart.imageUrl);
     img1.setAttribute("alt", cart.altTxt);
 
-    price = await getPrice(cart[i].id);
+    //price = await getPrice(cart[i].id);
     // afficher price * cart[i].quantity
-    fullPrice += price * cart[i].quantity;
+    //fullPrice += price * cart[i].quantity;
 }
 
 async function getPrice(id){
+
+    price = await getPrice(cart[i].id);
+
     fetch(baseUrl + id)
     .then(response => response.json())
     .then(result => {
+
+        
+        fullPrice += price * cart[i].quantity;
         return result.price;
     })
 }
