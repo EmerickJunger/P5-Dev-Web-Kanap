@@ -19,13 +19,13 @@ let cart = JSON.parse(localStorage.getItem("products"));
 let price = 0; 
 let fullPrice = 0;
 for(let i = 0; i < cart.lenght; i++){
-    // traitement creation html
+    // html
     
     const section = document.getElementById("cart__items");
    
     let article = document.createElement("article");
     let div1 = document.createElement("div");
-    let img = document.createElement("img"); 
+    let img1 = document.createElement("img"); 
     let div2 = document.createElement("div");
     let div3 = document.createElement("div");
     let h2 = document.createElement("h2");
@@ -54,13 +54,9 @@ for(let i = 0; i < cart.lenght; i++){
     p3.innerText = cart.quantity;
     p4.innerText = cart.delete;
 
-    
-
-
-
-
-
-
+    article.setAttribute("data-id", "data-color");
+    img1.setAttribute("src", cart.imageUrl);
+    img1.setAttribute("alt", cart.altTxt);
 
     price = await getPrice(cart[i].id);
     // afficher price * cart[i].quantity
