@@ -12,8 +12,8 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
 let productName = "";
-//let img.src = "";
-//let img.alt = "";
+let imgSrc = "";
+let imgAlt = "";
 
 function getProduct() {
     console.log(window.location);
@@ -27,8 +27,8 @@ function getProduct() {
                 const imgDiv = document.querySelector(".item__img");
                 let img = document.createElement("img");
 
-                img.src = result.imageUrl;
-                img.alt = result.altTxt;
+                imgSrc = result.imageUrl;
+                imgAlt = result.altTxt;
                 imgDiv.appendChild(img);
 
                 const title = document.querySelector("title");
@@ -65,8 +65,8 @@ function getProduct() {
             if (isValidQuantity && isValidColor){
                 //Gestion localStorage
                 let addToCart = {
-                    //img: result.imageUrl,
-                    //alt: result.altTxt,
+                    img: imgSrc,
+                    alt: imgAlt,
                     name: productName,
                     color: color,
                     quantity: Number(quantity.value),

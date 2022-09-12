@@ -18,59 +18,106 @@ async function fetchFromApi(id = "") {
 let cart = JSON.parse(localStorage.getItem("products"));
 let price = 0; 
 let fullPrice = 0;
-for(let i = 0; i < cart.lenght; i++){
-    
-    
-
-    const section = document.getElementById("cart__items");
-   
-    let article = document.createElement("article");
-    let div1 = document.createElement("div");
-    let img1 = document.createElement("img"); 
-    let div2 = document.createElement("div");
-    let div3 = document.createElement("div");
-    let h2 = document.createElement("h2");
-    let p1 = document.createElement("p");
-    let p2 = document.createElement("p");
-    let div4 = document.createElement("div");
-    let div5 = document.createElement("div");
-    let p3 = document.createElement("p");
-    let input = document.createElement("input");
-    let div6 = document.createElement("div");
-    let p4 = document.createElement("p");
-
-    article.className = "cart__item";
-    div1.className = "cart__item__img";
-    div2.className = "cart__item__content";
-    div3.className = "cart__item__content__description";
-    div4.className = "cart__item__content__settings";
-    div5.className = "cart__item__content__settings__quantity";
-    input.className = "itemQuantity";
-    div6.className = "cart__item__content__settings__delete";
-    p4.className = "deleteItem"
-    
-    h2.innerText = cart.name;
-    p1.innerText = cart.color;
-    p2.innerText = cart.price;
-    p3.innerText = cart.quantity;
-    p4.innerText = cart.delete;
-
-    article.setAttribute("data-id", "data-color");
-    img1.setAttribute("src", cart.imageUrl);
-    img1.setAttribute("alt", cart.altTxt);
-
-
-}
 
 async function getPrice(id){
 
-    price = await getPrice(cart[i].id);
+    const response = await fetch(baseUrl + id);
+    const product = await response.json();
 
-    fetch(baseUrl + id)
-    .then(response => response.json())
-    .then(result => {
+    return product.price;
+}
 
-        fullPrice += price * cart[i].quantity;
-        return result.price;
-    })
+async function getPanier(){
+
+    let totalQuantity = 0;
+    let totalPrice = 0;
+
+    for(let i = 0; i < cart.length; i++){
+    
+        let price = await getPrice(cart[i].id);
+
+        const section = document.getElementById("cart__items");
+       
+        let article = document.createElement("article");
+        let divCartItemImg = document.createElement("div");
+        let img = document.createElement("img"); 
+        let divCartItemContent = document.createElement("div");
+        let divCartItemContentDescription = document.createElement("div");
+        let h2 = document.createElement("h2");
+        let pColor = document.createElement("p");
+        let pPrice = document.createElement("p");
+        let divCartItemContentSettings = document.createElement("div");
+        let divCartItemContentSettingsQuantity = document.createElement("div");
+        let pQuantity = document.createElement("p");
+        let input = document.createElement("input");
+        let divCartItemContentSettingsDelete = document.createElement("div");
+        let pDelete = document.createElement("p");
+    
+        article.className = "cart__item";
+        divCartItemImg.className = "cart__item__img";
+        divCartItemContent.className = "cart__item__content";
+        divCartItemContentDescription.className = "cart__item__content__description";
+        divCartItemContentSettings.className = "cart__item__content__settings";
+        divCartItemContentSettingsQuantity.className = "cart__item__content__settings__quantity";
+        input.className = "itemQuantity";
+        divCartItemContentSettingsDelete.className = "cart__item__content__settings__delete";
+        pDelete.className = "deleteItem";
+        
+        h2.innerText = cart[i].name;
+        pColor.innerText = cart[i].color;
+        pPrice.innerText = price;
+        pQuantity.innerText = "Qté : ";
+        pDelete.innerText = "Supprimer";
+        input.value = cart[i].quantity;
+    
+        article.setAttribute("data-id", "data-color");
+        img.setAttribute("src", cart[i].img);
+        img.setAttribute("alt", cart[i].alt);
+    
+        divCartItemImg.appendChild(img);
+        divCartItemContentDescription.appendChild(h2);
+        divCartItemContentDescription.appendChild(pColor);
+        divCartItemContentDescription.appendChild(pPrice);
+    
+        divCartItemContentSettingsQuantity.appendChild(pQuantity);
+        divCartItemContentSettingsQuantity.appendChild(input);
+    
+        divCartItemContentSettingsDelete.appendChild(pDelete);
+    
+        divCartItemContentSettings.appendChild(divCartItemContentSettingsQuantity);
+        divCartItemContentSettings.appendChild(divCartItemContentSettingsDelete);
+    
+        divCartItemContent.appendChild(divCartItemContentDescription);
+        divCartItemContent.appendChild(divCartItemContentSettings);
+    
+        article.appendChild(divCartItemImg);
+        article.appendChild(divCartItemContent);
+        
+        section.appendChild(article);
+
+        totalQuantity += cart[i].quantity;
+        totalPrice += cart[i].quantity * price;
+
+        pDelete.addEventListener('click', function(){
+            deleteProduct(cart[i].id, cart[i].color);
+        });
+    } 
+    const spanTotal = document.getElementById("totalQuantity");
+    spanTotal.innerText = totalQuantity;
+
+    const spanTotalPrice = document.getElementById("totalPrice");
+    spanTotalPrice.innerText = totalPrice;
+
+}
+getPanier();
+
+function deleteProduct(id, color){
+    console.log(id);
+    console.log(color);
+    for(let i = 0; i < cart.length; i++){
+        
+    }
+}
+function modifyQuantity(){
+
 }
