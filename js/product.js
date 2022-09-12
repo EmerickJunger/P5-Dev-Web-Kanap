@@ -12,6 +12,9 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
 let productName = "";
+//let img.src = "";
+//let img.alt = "";
+
 function getProduct() {
     console.log(window.location);
     try {
@@ -62,8 +65,8 @@ function getProduct() {
             if (isValidQuantity && isValidColor){
                 //Gestion localStorage
                 let addToCart = {
-                    //img: ,
-                    // alt txt
+                    //img: result.imageUrl,
+                    //alt: result.altTxt,
                     name: productName,
                     color: color,
                     quantity: Number(quantity.value),
@@ -88,7 +91,7 @@ function getProduct() {
                     cart = [];
                     cart.push(addToCart);
                     localStorage.setItem("products",JSON.stringify(cart));     
-                } // rediriger vers cart
+                }
                 window.location.href = "cart.html";
             }
         }

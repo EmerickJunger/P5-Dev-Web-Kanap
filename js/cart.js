@@ -19,8 +19,9 @@ let cart = JSON.parse(localStorage.getItem("products"));
 let price = 0; 
 let fullPrice = 0;
 for(let i = 0; i < cart.lenght; i++){
-    // html
     
+    
+
     const section = document.getElementById("cart__items");
    
     let article = document.createElement("article");
@@ -58,9 +59,7 @@ for(let i = 0; i < cart.lenght; i++){
     img1.setAttribute("src", cart.imageUrl);
     img1.setAttribute("alt", cart.altTxt);
 
-    //price = await getPrice(cart[i].id);
-    // afficher price * cart[i].quantity
-    //fullPrice += price * cart[i].quantity;
+
 }
 
 async function getPrice(id){
@@ -71,7 +70,6 @@ async function getPrice(id){
     .then(response => response.json())
     .then(result => {
 
-        
         fullPrice += price * cart[i].quantity;
         return result.price;
     })
