@@ -1,10 +1,3 @@
-//recuperer le local Storage
-
-//boucle for reccrer le html
-
-// recuperer le prix avec fetch a l'api
-
-//function prend param id
 const baseUrl = "http://localhost:3000/api/products/";
 
 async function fetchFromApi(id = "") {
@@ -121,3 +114,6 @@ function deleteProduct(id, color){
 function modifyQuantity(){
 
 }
+
+
+// message d'erreur
