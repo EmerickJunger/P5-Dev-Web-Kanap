@@ -108,11 +108,12 @@ function deleteProduct(id, color){
     console.log(id);
     console.log(color);
     for(let i = 0; i < cart.length; i++){
-        
+        localStorage.removeItem("products");
+        window.location.reload();
     }
 }
 function modifyQuantity(){
-
+    console.log()
 }
 
 
