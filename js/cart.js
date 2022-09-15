@@ -53,6 +53,10 @@ async function getPanier(){
         divCartItemContentSettings.className = "cart__item__content__settings";
         divCartItemContentSettingsQuantity.className = "cart__item__content__settings__quantity";
         input.className = "itemQuantity";
+        /*input.name = "itemQuantity";
+        input.min = "1";
+        input.max = "100";
+        input.type = Number;*/
         divCartItemContentSettingsDelete.className = "cart__item__content__settings__delete";
         pDelete.className = "deleteItem";
         
@@ -94,13 +98,16 @@ async function getPanier(){
         pDelete.addEventListener('click', function(){
             deleteProduct(cart[i].id, cart[i].color);
         });
+
+        pQuantity.addEventListener('change', function(){
+            modifyQuantity(cart[i].quantity);
+        })
     } 
     const spanTotal = document.getElementById("totalQuantity");
     spanTotal.innerText = totalQuantity;
 
     const spanTotalPrice = document.getElementById("totalPrice");
     spanTotalPrice.innerText = totalPrice;
-
 }
 getPanier();
 
@@ -113,7 +120,8 @@ function deleteProduct(id, color){
     }
 }
 function modifyQuantity(){
-    console.log()
+    console.log(quantity)
+    localStorage.setItem('1')
 }
 
 
