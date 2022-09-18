@@ -70,6 +70,9 @@ async function getPanier(){
         article.setAttribute("data-id", "data-color");
         img.setAttribute("src", cart[i].img);
         img.setAttribute("alt", cart[i].alt);
+        input.setAttribute("type", "number");
+        input.setAttribute("min", "1");
+        input.setAttribute("max", "100");
     
         divCartItemImg.appendChild(img);
         divCartItemContentDescription.appendChild(h2);
@@ -112,17 +115,28 @@ async function getPanier(){
 getPanier();
 
 function deleteProduct(id, color){
-    console.log(id);
-    console.log(color);
+
+    let cart = JSON.parse(localStorage.getItem("products"));
+    let newCart = [];
+
     for(let i = 0; i < cart.length; i++){
-        localStorage.removeItem("products");
+        if(cart[i].id !== id && cart[i].color !== color){
+            newCart.push(cart[i]);
+        }
+        localStorage.setItem("products", JSON.stringify(newCart));
         window.location.reload();
     }
+    
 }
-function modifyQuantity(){
-    console.log(quantity)
-    localStorage.setItem('1')
+function modifyQuantity(id, color, quantity){
+
+    let cart = JSON.parse(localStorage.getItem("products"));
+    for(let i = 0; i < cart.length; i++){
+        
+        if(cart[i].id === id && cart[i].color === color){
+            cart[i].quantity = quantity;
+        }
+        window.location.reload();
+    }
+    localStorage.setItem("products", JSON.stringify(cart));
 }
-
-
-// message d'erreur
