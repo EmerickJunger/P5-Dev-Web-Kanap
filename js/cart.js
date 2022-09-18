@@ -140,3 +140,20 @@ function modifyQuantity(id, color, quantity){
     }
     localStorage.setItem("products", JSON.stringify(cart));
 }
+
+
+/*
+function regex(Variable) {
+	switch (Variable) {
+		case "prénom"   : reg = new RegExp("^(.|\n|\r|\n\r){3,}$","i"); break;
+        case "nom"   : reg = new RegExp("^(.|\n|\r|\n\r){3,}$","i"); break;
+		
+        
+        case "mail"    : reg = new RegExp("^([a-zA-Z0-9_-])+([.]?[a-zA-Z0-9_-]{1,})*@([a-zA-Z0-9-_]{2,}[.])+[a-zA-Z]{2,3}\\s*$","i"); break;
+		
+		 
+		
+	}
+	return reg;
+};
+*/
