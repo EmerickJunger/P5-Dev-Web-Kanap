@@ -102,8 +102,8 @@ async function getPanier(){
             deleteProduct(cart[i].id, cart[i].color);
         });
 
-        pQuantity.addEventListener('change', function(){
-            modifyQuantity(cart[i].quantity);
+        input.addEventListener('change', function(){
+            modifyQuantity(cart[i].id, cart[i].color);
         })
     } 
     const spanTotal = document.getElementById("totalQuantity");
@@ -128,32 +128,54 @@ function deleteProduct(id, color){
     }
     
 }
-function modifyQuantity(id, color, quantity){
+function modifyQuantity(id, color){
 
     let cart = JSON.parse(localStorage.getItem("products"));
+    let quantities = document.querySelectorAll(".itemQuantity");
     for(let i = 0; i < cart.length; i++){
         
-        if(cart[i].id === id && cart[i].color === color){
-            cart[i].quantity = quantity;
+        if(cart[i].id == id && cart[i].color == color){
+            cart[i].quantity = Number(quantities[i].value);
         }
-        window.location.reload();
     }
     localStorage.setItem("products", JSON.stringify(cart));
+    window.location.reload();
 }
 
 
 /*
-function regex(Variable) {
-	switch (Variable) {
-		case "prénom"   : reg = new RegExp("^(.|\n|\r|\n\r){3,}$","i"); break;
-        case "nom"   : reg = new RegExp("^(.|\n|\r|\n\r){3,}$","i"); break;
-		
-        
-        case "mail"    : reg = new RegExp("^([a-zA-Z0-9_-])+([.]?[a-zA-Z0-9_-]{1,})*@([a-zA-Z0-9-_]{2,}[.])+[a-zA-Z]{2,3}\\s*$","i"); break;
-		
-		 
-		
-	}
-	return reg;
-};
+const prenom = document.getElementById("firstName");
+const nom = document.getElementById("lastName");
+const ville = document.getElementById("city");
+const adresse = document.getElementById("address");
+const mail = document.getElementById("email");
+
+
+const emailErrorMsg = document.getElementById("emailErrorMsg");
+function validateEmail(mail) {
+  const regexMail =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regexMail.test(mail) == false) {
+    return false;
+  } else {
+    emailErrorMsg.innerHTML = null;
+    return true;
+  }
+}
+
+
+const regexName = /^[a-z][a-z '-.,]{1,31}$|^$/i;
+
+
+const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+function validateFirstName(prenom) {
+  if (regexName.test(prenom) == false) {
+    return false;
+  } else {
+    firstNameErrorMsg.innerHTML = null;
+    return true;
+  }
+}
 */
+
+let emailRegex = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
