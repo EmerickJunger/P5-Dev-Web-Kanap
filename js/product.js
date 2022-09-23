@@ -16,14 +16,13 @@ let imgSrc = "";
 let imgAlt = "";
 
 function getProduct() {
-    console.log(window.location);
     try {
         fetch(baseUrl+id)
         .then(response=>response.json())
         .then(
         
             result => {
-                console.log(result);
+
                 const imgDiv = document.querySelector(".item__img");
                 let img = document.createElement("img");
 
@@ -42,7 +41,6 @@ function getProduct() {
                 description.innerText = result.description;
 
                 for (let i=0; i<result.colors.length;i++){
-                    console.log(result.colors[i]);
                     const colors = document.getElementById("colors");
                     let option = document.createElement("option");
                     option.value = result.colors[i];
@@ -120,7 +118,6 @@ function verifyQuantity(quantity){
 }
 function verifyColor(color){
     let span = document.createElement("span");
-    console.log(color);
     if (color.includes("--SVP, choisissez une couleur --")){
         
         span.style.color = "red";

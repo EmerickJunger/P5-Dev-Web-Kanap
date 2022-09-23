@@ -144,33 +144,28 @@ btnOrder.addEventListener('click', function(){
   if (isValid){
     // requete api
 
-    function makeJsonData() {
-  let contact = {
+    let contact = {
     firstName: prenom.value,
     lastName: nom.value,
     address: adresse.value,
     city: ville.value,
     email: mail.value,
   };
-  let items = getCart();
-  let products = [];
+    let items = getPanier();
+    let products = [];
 
   for (i = 0; i < items.length; i++) {
     if (products.find((e) => e == items[i][0])) {
       console.log("not found");
-    } else {
-      products.push(items[i][0]);
-    }
-  }
-  let jsonData = JSON.stringify({ contact, products });
-  return jsonData;
+    } else
+    {
+        products.push(items[i][0]);
+        let jsonData = JSON.stringify({ contact, products });
+        return jsonData;
+        localStorage.removeItem("products");
+        window.location.href("confirmation.html?/orderId="+orderId)
+    };
 }
-
-    // vider local storage
-    
-    localStorage.removeItem("products");
-    window.location.href("confirmation.html?/orderId="+orderId)
-  }
 });*/
 
 const prenom = document.getElementById("firstName");
