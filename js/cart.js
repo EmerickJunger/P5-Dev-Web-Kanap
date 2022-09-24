@@ -137,44 +137,39 @@ function modifyQuantity(id, color){
     localStorage.setItem("products", JSON.stringify(cart));
     window.location.reload();
 }
-/*let orderID = 1
+let orderID = 1
 const btnOrder = document.getElementById("order")
 btnOrder.addEventListener('click', function(){
+
+
   let isValid = validForm();
   if (isValid){
     // requete api
 
     let contact = {
-    firstName: prenom.value,
-    lastName: nom.value,
-    address: adresse.value,
-    city: ville.value,
-    email: mail.value,
-  };
-    let items = getPanier();
-    let products = [];
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value,
+    email: document.getElementById("email").value,
 
-  for (i = 0; i < items.length; i++) {
-    if (products.find((e) => e == items[i][0])) {
-      console.log("not found");
-    } else
-    {
-        products.push(items[i][0]);
-        let jsonData = JSON.stringify({ contact, products });
-        return jsonData;
-        localStorage.removeItem("products");
-        window.location.href("confirmation.html?/orderId="+orderId)
+  }
+  
+  console.log(contact);
+
     };
-}
-});*/
+});
 
-const prenom = document.getElementById("firstName");
+/*const prenom = document.getElementById("firstName");
 const nom = document.getElementById("lastName");
 const ville = document.getElementById("city");
 const adresse = document.getElementById("address");
-const mail = document.getElementById("email");
+const mail = document.getElementById("email");*/
 
-const emailErrorMsg = document.getElementById("emailErrorMsg");
+//localStorage.removeItem("products");
+//window.location.href("confirmation.html?/orderId="+orderId)
+
+/*const emailErrorMsg = document.getElementById("emailErrorMsg");
 function validateEmail(mail) {
   let emailRegex = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
 
@@ -228,4 +223,4 @@ function validateAdress(adresse) {
     adressErrorMsg.innerHTML = null;
     return true;
   }
-}
+}*/
