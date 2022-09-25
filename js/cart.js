@@ -299,4 +299,5 @@ if (dataFormulaire) {
   document.getElementById("address").value = dataFormulaire.address;
   document.getElementById("city").value = dataFormulaire.city;
   document.getElementById("email").value = dataFormulaire.email;
+  localStorage.clear();
 }
