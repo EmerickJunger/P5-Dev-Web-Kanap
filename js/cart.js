@@ -136,9 +136,11 @@ function modifyQuantity(id, color){
     }
     localStorage.setItem("products", JSON.stringify(cart));
     window.location.reload();
-}
-let orderID = 1
-const btnOrder = document.getElementById("order")
+};
+
+let orderId = 1
+
+const btnOrder = document.getElementById("order");
 btnOrder.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -156,89 +158,145 @@ btnOrder.addEventListener('click', (event) => {
   console.log(contact);
 
   const emailRegex = (value) => {
-    return ("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$").test(value);
+    return /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test(value);
   };
 
   const adressRegex = (value) => {
-    return ("[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+").test(value);
+    return /^[a-zA-Z0-9.,-_ ]{5,50}[ ]{0,2}$/.test(value);
   };
 
-  const nameRegex = (value) => {
-    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+  const firstNameRegex = (value) => {
+    return /^[A-Z][A-Za-z\é\è\ê\-]+$/.test(value);
   };
   
   const lastNameRegex = (value) => {
-    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+    return /^[A-Z][A-Za-z\é\è\ê\-]+$/.test(value);
   };
   
   const cityRegex = (value) => {
-    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+    return /^[A-Z][A-Za-z\é\è\ê\-]+$/.test(value);
   };
-}
 
-);
+  function firstNameControl() {
+    const prenom = contact.firstName;
+    let inputFirstName = document.getElementById("firstName");
+    if (firstNameRegex(prenom)) {
 
-/*const prenom = document.getElementById("firstName");
-const nom = document.getElementById("lastName");
-const ville = document.getElementById("city");
-const adresse = document.getElementById("address");
-const mail = document.getElementById("email");*/
+      document.getElementById("firstNameErrorMsg").textContent = "";
+      return true;
 
-//localStorage.removeItem("products");
-//window.location.href("confirmation.html?/orderId="+orderId)
+    } else {
 
-/*const emailErrorMsg = document.getElementById("emailErrorMsg");
-function validateEmail(mail) {
-  let emailRegex = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
+      document.getElementById("firstNameErrorMsg").textContent = "Veuillez remplir avec un prénom valide";
+      return false;
 
-  if (emailRegex.test(mail) == false) {
-    return false;
-  } else {
-    emailErrorMsg.innerHTML = null;
-    return true;
+    };
+  };
+
+  function lastNameControl() {
+    const nom = contact.lastName;
+    let inputLastName = document.getElementById("lastName");
+    if (lastNameRegex(nom)) {
+
+      document.getElementById("lastNameErrorMsg").textContent = "";
+      return true;
+
+    } else {
+
+      document.getElementById("lastNameErrorMsg").textContent =
+        "Veuillez remplir avec un nom valide";
+      return false;
+
+    };
+  };
+
+  function emailControl() {
+    const email = contact.email;
+    let inputMail = document.getElementById("email");
+    if (emailRegex(email)) {
+
+      document.getElementById("emailErrorMsg").textContent = "";
+      return true;
+
+    } else {
+
+      document.getElementById("emailErrorMsg").textContent =
+        "Veuillez remplir avec un email valide";
+      return false;
+
+    };
+  };
+
+  function addressControl() {
+    const adress = contact.address;
+    let inputAddress = document.getElementById("address");
+    if (adressRegex(adress)) {
+
+      document.getElementById("addressErrorMsg").textContent = "";
+      return true;
+
+    } else {
+
+      document.getElementById("addressErrorMsg").textContent =
+        "Veuillez remplir avec une adresse valide";
+      return false;
+
+    };
+  };
+
+  function cityControl() {
+    const ville = contact.city;
+    let inputCity = document.getElementById("city");
+    if (cityRegex(ville)) {
+
+      document.getElementById("cityErrorMsg").textContent = "";
+      return true;
+
+    } else {
+
+      document.getElementById("cityErrorMsg").textContent =
+        "Veuillez remplir avec un nom de ville valide";
+      return false;
+
+    };
+  };
+
+  if (firstNameControl() && lastNameControl() && addressControl() && cityControl() && emailControl())
+    {
+      localStorage.setItem("contact", JSON.stringify(contact));
+      sendToServer();
+
   }
-}
 
-const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-function validateFirstName(prenom) {
-  let nameRegex = new RegExp ("/^[a-z][a-z '-.,]{1,31}$|^$/i");
-  if (nameRegex.test(prenom) == false) {
-    return false;
-  } else {
-    firstNameErrorMsg.innerHTML = null;
-    return true;
-  }
-}
+  function sendToServer() {
+    const sendToServer = fetch("http://localhost:3000/api/products/order", {
+      method: "POST",
+      body: JSON.stringify({ contact, cart }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((server) => {
+        orderId = server.orderId;
+        console.log(orderId);
+      });
 
-const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-function validateLastName(nom) {
-  let lastNameRegex = new RegExp ("/^[a-z][a-z '-.,]{1,31}$|^$/i");
-  if (lastNameRegex.test(nom) == false) {
-    return false;
-  } else {
-    lastNameErrorMsg.innerHTML = null;
-    return true;
+    if (orderId != "") {
+      location.href = "confirmation.html?id=" + orderId;
+    }
   }
-}
+});
 
-const cityErrorMsg = document.getElementById("cityErrorMsg");
-function validateCity(ville) {
-  let cityRegex = new RegExp ("/^[a-z][a-z '-.,]{1,31}$|^$/i");
-  if (cityRegex.test(ville) == false) {
-    return false;
-  } else {
-    cityErrorMsg.innerHTML = null;
-    return true;
-  }
-}
+let dataFormulaire = JSON.parse(localStorage.getItem("contact"));
 
-const adressErrorMsg = document.getElementById("adressErrorMsg");
-function validateAdress(adresse) {
-  let adressRegex = new RegExp ("[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
-  if (adressRegex.test(adresse) == false) {
-    return false;
-  } else {
-    adressErrorMsg.innerHTML = null;
-    return true;
-  }
-}*/
+console.log(dataFormulaire);
+if (dataFormulaire) {
+  document.getElementById("firstName").value = dataFormulaire.firstName;
+  document.getElementById("lastName").value = dataFormulaire.lastName;
+  document.getElementById("address").value = dataFormulaire.address;
+  document.getElementById("city").value = dataFormulaire.city;
+  document.getElementById("email").value = dataFormulaire.email;
+}
