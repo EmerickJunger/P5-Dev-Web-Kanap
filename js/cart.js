@@ -139,11 +139,9 @@ function modifyQuantity(id, color){
 }
 let orderID = 1
 const btnOrder = document.getElementById("order")
-btnOrder.addEventListener('click', function(){
+btnOrder.addEventListener('click', (event) => {
+  event.preventDefault();
 
-
-  let isValid = validForm();
-  if (isValid){
     // requete api
 
     let contact = {
@@ -153,12 +151,32 @@ btnOrder.addEventListener('click', function(){
     city: document.getElementById("city").value,
     email: document.getElementById("email").value,
 
-  }
+  };
   
   console.log(contact);
 
-    };
-});
+  const emailRegex = (value) => {
+    return ("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$").test(value);
+  };
+
+  const adressRegex = (value) => {
+    return ("[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+").test(value);
+  };
+
+  const nameRegex = (value) => {
+    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+  };
+  
+  const lastNameRegex = (value) => {
+    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+  };
+  
+  const cityRegex = (value) => {
+    return ("/^[a-z][a-z '-.,]{1,31}$|^$/i").test(value);
+  };
+}
+
+);
 
 /*const prenom = document.getElementById("firstName");
 const nom = document.getElementById("lastName");
