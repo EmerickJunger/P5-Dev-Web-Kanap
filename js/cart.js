@@ -138,7 +138,7 @@ function modifyQuantity(id, color){
     window.location.reload();
 };
 
-let orderId = 1
+//let orderId = 1
 
 const btnOrder = document.getElementById("order");
 btnOrder.addEventListener('click', (event) => {
@@ -269,9 +269,18 @@ btnOrder.addEventListener('click', (event) => {
   }
 
   function sendToServer() {
+    let idProducts = [];
+    for(let i=0; i<cart.length; i++){
+      idProducts.push(cart[i].id);
+    }
+    const requestBody = {
+      contact: contact, 
+      products: idProducts,
+    }; 
+    console.log(requestBody);
     const sendToServer = fetch("http://localhost:3000/api/products/order", {
       method: "POST",
-      body: JSON.stringify({ contact, cart }),
+      body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
       },
@@ -281,18 +290,17 @@ btnOrder.addEventListener('click', (event) => {
       })
       .then((server) => {
         orderId = server.orderId;
-        console.log(orderId);
-      });
+        console.log("orderId =" + orderId);
 
-    if (orderId != "") {
-      location.href = "confirmation.html?id=" + orderId;
-    }
+        if (orderId != "") {
+          location.href = "confirmation.html?orderId=" + orderId;
+        }
+      });
   }
 });
 
 let dataFormulaire = JSON.parse(localStorage.getItem("contact"));
 
-console.log(dataFormulaire);
 if (dataFormulaire) {
   document.getElementById("firstName").value = dataFormulaire.firstName;
   document.getElementById("lastName").value = dataFormulaire.lastName;
@@ -301,3 +309,4 @@ if (dataFormulaire) {
   document.getElementById("email").value = dataFormulaire.email;
   localStorage.clear();
 }
+//verifier

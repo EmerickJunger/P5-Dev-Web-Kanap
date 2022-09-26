@@ -26,8 +26,10 @@ function getProduct() {
                 const imgDiv = document.querySelector(".item__img");
                 let img = document.createElement("img");
 
-                imgSrc = result.imageUrl;
+                imgSrc = result.imageUrl; 
                 imgAlt = result.altTxt;
+                img.src = imgSrc;
+                img.alt = imgAlt;
                 imgDiv.appendChild(img);
 
                 const title = document.querySelector("title");
