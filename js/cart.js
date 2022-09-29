@@ -16,7 +16,6 @@ async function getPrice(id){
 
     const response = await fetch(baseUrl + id);
     const product = await response.json();
-
     return product.price;
 }
 
@@ -154,8 +153,6 @@ btnOrder.addEventListener('click', (event) => {
     email: document.getElementById("email").value,
 
   };
-  
-  console.log(contact);
 
   const emailRegex = (value) => {
     return /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test(value);
@@ -277,7 +274,6 @@ btnOrder.addEventListener('click', (event) => {
       contact: contact, 
       products: idProducts,
     }; 
-    console.log(requestBody);
     const sendToServer = fetch("http://localhost:3000/api/products/order", {
       method: "POST",
       body: JSON.stringify(requestBody),
@@ -290,7 +286,6 @@ btnOrder.addEventListener('click', (event) => {
       })
       .then((server) => {
         orderId = server.orderId;
-        console.log("orderId =" + orderId);
 
         if (orderId != "") {
           location.href = "confirmation.html?orderId=" + orderId;
@@ -302,11 +297,6 @@ btnOrder.addEventListener('click', (event) => {
 let dataFormulaire = JSON.parse(localStorage.getItem("contact"));
 
 if (dataFormulaire) {
-  document.getElementById("firstName").value = dataFormulaire.firstName;
-  document.getElementById("lastName").value = dataFormulaire.lastName;
-  document.getElementById("address").value = dataFormulaire.address;
-  document.getElementById("city").value = dataFormulaire.city;
-  document.getElementById("email").value = dataFormulaire.email;
   localStorage.clear();
 }
 //verifier

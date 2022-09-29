@@ -16,8 +16,6 @@ function getAllProducts() {
 
                 result.forEach(product => {
 
-                    console.log(product);
-
                     const section = document.getElementById("items");
 
                     let baliseA = document.createElement("a");
