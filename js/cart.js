@@ -18,7 +18,7 @@ async function getPrice(id){
     const product = await response.json();
     return product.price;
 }
-
+//ajout au panier
 async function getPanier(){
 
     let totalQuantity = 0;
@@ -108,7 +108,7 @@ async function getPanier(){
     spanTotalPrice.innerText = totalPrice;
 }
 getPanier();
-
+//supression dans le panier
 function deleteProduct(id, color){
 
     let cart = JSON.parse(localStorage.getItem("products"));
@@ -123,6 +123,7 @@ function deleteProduct(id, color){
     }
     
 }
+//modification de quantité dans le panier
 function modifyQuantity(id, color){
 
     let cart = JSON.parse(localStorage.getItem("products"));
@@ -137,13 +138,9 @@ function modifyQuantity(id, color){
     window.location.reload();
 };
 
-//let orderId = 1
-
 const btnOrder = document.getElementById("order");
 btnOrder.addEventListener('click', (event) => {
   event.preventDefault();
-
-    // requete api
 
     let contact = {
     firstName: document.getElementById("firstName").value,
@@ -173,7 +170,7 @@ btnOrder.addEventListener('click', (event) => {
   const cityRegex = (value) => {
     return /^[A-Z][A-Za-z\é\è\ê\-]+$/.test(value);
   };
-
+//regex pour le prénom
   function firstNameControl() {
     const prenom = contact.firstName;
     let inputFirstName = document.getElementById("firstName");
@@ -189,7 +186,7 @@ btnOrder.addEventListener('click', (event) => {
 
     };
   };
-
+//regex pour le nom
   function lastNameControl() {
     const nom = contact.lastName;
     let inputLastName = document.getElementById("lastName");
@@ -206,7 +203,7 @@ btnOrder.addEventListener('click', (event) => {
 
     };
   };
-
+//regex pour l'email
   function emailControl() {
     const email = contact.email;
     let inputMail = document.getElementById("email");
@@ -223,7 +220,7 @@ btnOrder.addEventListener('click', (event) => {
 
     };
   };
-
+//regex pour l'adresse
   function addressControl() {
     const adress = contact.address;
     let inputAddress = document.getElementById("address");
@@ -240,7 +237,7 @@ btnOrder.addEventListener('click', (event) => {
 
     };
   };
-
+//regex pour la ville
   function cityControl() {
     const ville = contact.city;
     let inputCity = document.getElementById("city");
@@ -264,7 +261,7 @@ btnOrder.addEventListener('click', (event) => {
       sendToServer();
 
   }
-
+//regex pour le bouton commander qui mène à la page confirmation et donc au bon de commande
   function sendToServer() {
     let idProducts = [];
     for(let i=0; i<cart.length; i++){
@@ -299,4 +296,3 @@ let dataFormulaire = JSON.parse(localStorage.getItem("contact"));
 if (dataFormulaire) {
   localStorage.clear();
 }
-//verifier

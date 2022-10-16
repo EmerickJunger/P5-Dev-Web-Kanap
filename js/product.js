@@ -14,7 +14,7 @@ const id = urlParams.get("id");
 let productName = "";
 let imgSrc = "";
 let imgAlt = "";
-
+//affichage d'un produit
 function getProduct() {
     try {
         fetch(baseUrl+id)
@@ -100,6 +100,7 @@ function getProduct() {
         console.error(error);
     } 
 }
+//vérifier si la quantité à été choisi avec un un renvoi de message d'erreur si non effectué
 function verifyQuantity(quantity){
     let span = document.createElement("span");
     if (Number(quantity)<1){
@@ -118,6 +119,7 @@ function verifyQuantity(quantity){
         return true;
     };
 }
+//vérifier si la couleur à été choisi avec un un renvoi de message d'erreur si non effectué
 function verifyColor(color){
     let span = document.createElement("span");
     if (color.includes("--SVP, choisissez une couleur --")){

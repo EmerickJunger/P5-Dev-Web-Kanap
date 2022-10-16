@@ -7,7 +7,7 @@ async function fetchFromApi(id = "") {
     const result = await response.json();
     return result;
 };
-
+//affichage de l'ensemble des produits
 function getAllProducts() {
     try {
         fetchFromApi().then(
