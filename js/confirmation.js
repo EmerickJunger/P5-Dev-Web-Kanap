@@ -5,3 +5,4 @@ const orderId = urlParams.get("orderId");
 
 const spanOrder = document.getElementById("orderId");
 spanOrder.innerText = orderId;
+localStorage.clear();

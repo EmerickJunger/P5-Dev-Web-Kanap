@@ -111,17 +111,24 @@ getPanier();
 //supression dans le panier
 function deleteProduct(id, color){
 
-    let cart = JSON.parse(localStorage.getItem("products"));
+    /*let cart = JSON.parse(localStorage.getItem("products"));
     let newCart = [];
-
+    console.log(cart);
     for(let i = 0; i < cart.length; i++){
         if(cart[i].id !== id && cart[i].color !== color){
             newCart.push(cart[i]);
         }
         localStorage.setItem("products", JSON.stringify(newCart));
-        window.location.reload();
+        //window.location.reload();
+    }*/
+    let cart = JSON.parse(localStorage.getItem("products"));
+    let filteredProducts = cart.filter(product => product.id === id);
+    if (filteredProducts.length > 1) {
+      filteredProducts = filteredProducts.filter(product => product.color.includes(color));
     }
-    
+    cart = cart.filter(product => product !== filteredProducts[0]);
+    localStorage.setItem("products", JSON.stringify(cart));
+    window.location.reload();
 }
 //modification de quantité dans le panier
 function modifyQuantity(id, color){
@@ -261,7 +268,7 @@ btnOrder.addEventListener('click', (event) => {
       sendToServer();
 
   }
-//regex pour le bouton commander qui mène à la page confirmation et donc au bon de commande
+// le bouton commander qui mène à la page confirmation et donc au bon de commande
   function sendToServer() {
     let idProducts = [];
     for(let i=0; i<cart.length; i++){
@@ -277,7 +284,7 @@ btnOrder.addEventListener('click', (event) => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
+    }) 
       .then((response) => {
         return response.json();
       })
@@ -290,9 +297,3 @@ btnOrder.addEventListener('click', (event) => {
       });
   }
 });
-
-let dataFormulaire = JSON.parse(localStorage.getItem("contact"));
-
-if (dataFormulaire) {
-  localStorage.clear();
-}
